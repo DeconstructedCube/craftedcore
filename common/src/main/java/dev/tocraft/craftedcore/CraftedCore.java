@@ -3,7 +3,7 @@ package dev.tocraft.craftedcore;
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;
 import net.fabricmc.api.EnvType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -28,7 +28,7 @@ public class CraftedCore {
     @ApiStatus.Internal
     public final static Path CACHE_DIR = PlatformData.getConfigPath().resolve(CraftedCore.MODID + File.separatorChar + "cache");
     @ApiStatus.Internal
-    public static final ResourceLocation CLEAR_CACHE_PACKET = id("clear_cache");
+    public static final Identifier CLEAR_CACHE_PACKET = id("clear_cache");
     public static final String MODID = "craftedcore";
 
     public void initialize() {
@@ -76,8 +76,8 @@ public class CraftedCore {
 
     @Contract("_ -> new")
     @ApiStatus.Internal
-    public static @NotNull ResourceLocation id(String name) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, name);
+    public static @NotNull Identifier id(String name) {
+        return Identifier.fromNamespaceAndPath(MODID, name);
     }
 
     @ApiStatus.Internal

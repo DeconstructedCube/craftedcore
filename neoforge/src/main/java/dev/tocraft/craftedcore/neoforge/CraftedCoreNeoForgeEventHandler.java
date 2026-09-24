@@ -1,6 +1,6 @@
 package dev.tocraft.craftedcore.neoforge;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class CraftedCoreNeoForgeEventHandler {
     @SubscribeEvent
     public void addReloadListenerEvent(AddServerReloadListenersEvent event) {
-        for (Map.Entry<ResourceLocation, SynchronizedJsonReloadListener> entry : SynchronizedReloadListenerRegistry.getAllListener().entrySet()) {
+        for (Map.Entry<Identifier, SynchronizedJsonReloadListener> entry : SynchronizedReloadListenerRegistry.getAllListener().entrySet()) {
             event.addListener(entry.getKey(), entry.getValue());
         }
     }

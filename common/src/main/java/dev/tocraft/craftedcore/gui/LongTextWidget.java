@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -46,7 +47,8 @@ public class LongTextWidget extends AbstractScrollArea {
     }
 
     public void addText(Component text, Font font, int color) {
-        this.text.add(new MultiLineTextWidget(text, font).setColor(color));
+        Component styled = (color != -1) ? text.copy().withStyle(s -> s.withColor(TextColor.fromRgb(color & 0xFFFFFF))) : text;
+        this.text.add(new MultiLineTextWidget(styled, font));
     }
 
     protected int textWidth() {
@@ -78,7 +80,7 @@ public class LongTextWidget extends AbstractScrollArea {
         }
 
         guiGraphics.disableScissor();
-        renderScrollbar(guiGraphics);
+        renderScrollbar(guiGraphics, mouseX, mouseY);
 
         if (separators) {
             renderSeparators(guiGraphics);

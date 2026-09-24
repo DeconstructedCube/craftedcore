@@ -9,7 +9,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.ApiStatus;
@@ -22,7 +22,7 @@ import static dev.tocraft.craftedcore.network.ModernNetworking.getType;
 
 @SuppressWarnings({"unused", "resource"})
 public class ModernNetworkingImpl {
-    public static void registerReceiver(ModernNetworking.Side side, ResourceLocation id, ModernNetworking.Receiver receiver) {
+    public static void registerReceiver(ModernNetworking.Side side, Identifier id, ModernNetworking.Receiver receiver) {
         if (side == ModernNetworking.Side.C2S) {
             PayloadTypeRegistry.playC2S().register(getType(id), PacketPayload.streamCodec());
             ServerPlayNetworking.registerGlobalReceiver(getType(id), (payload, context) -> receiver.receive(new ModernNetworking.Context() {
@@ -38,10 +38,7 @@ public class ModernNetworkingImpl {
 
                 @Override
                 public void queue(Runnable runnable) {
-                    MinecraftServer server = context.player().getServer();
-                    if (server != null) {
-                        server.execute(runnable);
-                    }
+                    context.server().execute(runnable);
                 }
             }, payload.nbt()));
         } else if (side == ModernNetworking.Side.S2C) {
@@ -65,7 +62,7 @@ public class ModernNetworkingImpl {
         }
     }
 
-    public static void registerType(ResourceLocation id) {
+    public static void registerType(Identifier id) {
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
             ModernNetworking.getType(id);
             PayloadTypeRegistry.playS2C().register(getType(id), PacketPayload.streamCodec());

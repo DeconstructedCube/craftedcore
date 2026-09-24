@@ -12,7 +12,10 @@ import dev.tocraft.craftedcore.event.common.ServerLevelEvents;
 public class CraftedCoreFabricEventHandler {
 
     public static void initialize() {
-        EntitySleepEvents.ALLOW_SLEEP_TIME.register((player, sleepingPos, vanillaResult) -> PlayerEvents.ALLOW_SLEEP_TIME.invoke().allowSleepTime(player, sleepingPos, vanillaResult));
+        EntitySleepEvents.ALLOW_SLEEPING.register((player, sleepingPos) -> {
+            net.minecraft.world.InteractionResult res = PlayerEvents.ALLOW_SLEEP_TIME.invoke().allowSleepTime(player, sleepingPos, true);
+            return res == net.minecraft.world.InteractionResult.FAIL ? net.minecraft.world.entity.player.Player.BedSleepingProblem.OTHER_PROBLEM : null;
+        });
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> CommandEvents.REGISTRATION.invoke().register(dispatcher, registryAccess, environment));
         ServerWorldEvents.LOAD.register((server, world) -> ServerLevelEvents.LEVEL_LOAD.invoke().call(world));
         ServerWorldEvents.UNLOAD.register((server, world) -> ServerLevelEvents.LEVEL_UNLOAD.invoke().call(world));

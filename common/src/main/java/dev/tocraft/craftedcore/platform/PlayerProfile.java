@@ -1,7 +1,7 @@
 package dev.tocraft.craftedcore.platform;
 
 import com.google.gson.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -213,7 +213,7 @@ public record PlayerProfile(@NotNull String name, @NotNull UUID id, @Nullable UR
     }
 
     @Nullable
-    public ResourceLocation getSkinId() {
+    public Identifier getSkinId() {
         if (skin != null) {
             return TextureCache.getTextureId(CraftedCore.MODID, "entity", "custom_skin_", "png", skin);
         } else {
@@ -222,7 +222,7 @@ public record PlayerProfile(@NotNull String name, @NotNull UUID id, @Nullable UR
     }
 
     @Nullable
-    public ResourceLocation getCapeId() {
+    public Identifier getCapeId() {
         if (cape != null) {
             return TextureCache.getTextureId(CraftedCore.MODID, "entity", "custom_cape_", "png", cape);
         } else {

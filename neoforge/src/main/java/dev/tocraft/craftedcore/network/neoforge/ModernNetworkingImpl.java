@@ -5,7 +5,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -22,7 +22,7 @@ import static dev.tocraft.craftedcore.network.ModernNetworking.getType;
 
 @SuppressWarnings("unused")
 public class ModernNetworkingImpl {
-    public static void registerReceiver(ModernNetworking.Side side, ResourceLocation id, ModernNetworking.Receiver
+    public static void registerReceiver(ModernNetworking.Side side, Identifier id, ModernNetworking.Receiver
             receiver) {
         IEventBus eventBus = CraftedCoreNeoForge.getEventBus();
 
@@ -63,7 +63,7 @@ public class ModernNetworkingImpl {
         }
     }
 
-    public static void registerType(ResourceLocation id) {
+    public static void registerType(Identifier id) {
         if (FMLLoader.getDist() == Dist.DEDICATED_SERVER) {
             ModernNetworking.getType(id);
             registerReceiver(ModernNetworking.Side.S2C, id, (context, data) -> {

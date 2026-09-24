@@ -2,8 +2,9 @@ package dev.tocraft.craftedcore.registration.fabric;
 
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -15,10 +16,10 @@ import java.util.concurrent.Executor;
 @SuppressWarnings("unused")
 @ApiStatus.Internal
 public class SynchronizedReloadListenerRegistryImpl {
-    public static void onRegister(SynchronizedJsonReloadListener reloadListener, ResourceLocation id) {
+    public static void onRegister(SynchronizedJsonReloadListener reloadListener, Identifier id) {
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new IdentifiableResourceReloadListener() {
             @Override
-            public ResourceLocation getFabricId() {
+            public Identifier getFabricId() {
                 return id;
             }
 
@@ -28,8 +29,8 @@ public class SynchronizedReloadListenerRegistryImpl {
             }
 
             @Override
-            public @NotNull CompletableFuture<Void> reload(PreparationBarrier preparationBarrier, ResourceManager resourceManager, Executor executor, Executor executor2) {
-                return reloadListener.reload(preparationBarrier, resourceManager, executor, executor2);
+            public @NotNull CompletableFuture<Void> reload(PreparableReloadListener.SharedState sharedState, Executor executor, PreparableReloadListener.PreparationBarrier preparationBarrier, Executor executor2) {
+                return reloadListener.reload(sharedState, executor, preparationBarrier, executor2);
             }
         });
     }

@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 // heavily based on the work of Draylar - https://github.com/Draylar/omega-config/ and therefore this class is licensed under MIT
 public class ConfigLoader {
-    public static final ResourceLocation CONFIG_SYNC = CraftedCore.id("config_sync");
+    public static final Identifier CONFIG_SYNC = CraftedCore.id("config_sync");
     private static final Map<String, Config> LOADED_CONFIGS = new ConcurrentHashMap<>();
     private static final List<Config> CLIENT_CONFIGS = new ArrayList<>();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setStrictness(Strictness.LENIENT).create();
