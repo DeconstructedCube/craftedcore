@@ -40,7 +40,7 @@ public final class EventFactory {
      * @param <T>   a functional interface used for invocation
      * @return the created event you can use for invocation
      */
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Contract(value = "_ -> new", pure = true)
     public static <T> @NotNull Event<T> createWithInteractionResult(Class<T> clazz) {
         return new Event<>(listeners -> (T) Proxy.newProxyInstance(EventFactory.class.getClassLoader(), new Class[]{clazz}, (proxy, method, args) -> {
@@ -72,7 +72,7 @@ public final class EventFactory {
      * @param <T>   a functional interface used for invocation
      * @return the created event you can use for invocation
      */
-    @SuppressWarnings({"unchecked", "SuspiciousInvocationHandlerImplementation"})
+    @SuppressWarnings({"rawtypes", "unchecked", "SuspiciousInvocationHandlerImplementation"})
     @Contract(value = "_ -> new", pure = true)
     public static <T> @NotNull Event<T> createWithVoid(Class<T> clazz) {
         return new Event<>(listeners -> (T) Proxy.newProxyInstance(EventFactory.class.getClassLoader(), new Class[]{clazz}, (proxy, method, args) -> {
