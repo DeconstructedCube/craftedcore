@@ -2,7 +2,8 @@
   "required": true,
   "minVersion": "0.8",
   "package": "dev.tocraft.craftedcore.fabric.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "refmap": "craftedcore.refmap.json",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingBreatheMixin",
     "LivingDeathMixin",
