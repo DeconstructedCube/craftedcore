@@ -1,4 +1,4 @@
-[![Build](https://img.shields.io/github/actions/workflow/status/ToCraft/craftedcore/build_only.yml?style=for-the-badge)](https://github.com/ToCraft/craftedcore/actions/workflows/build_only.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/ToCraft/craftedcore/build.yml?style=for-the-badge)](https://github.com/ToCraft/craftedcore/actions/workflows/build.yml)
 [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fmaven.tocraft.dev%2Fpublic%2Fdev%2Ftocraft%2Fcraftedcore%2Fmaven-metadata.xml&style=for-the-badge&label=CraftedCore)](https://maven.tocraft.dev/#/public/dev/tocraft/craftedcore)
 [![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/ToCraft)
 
@@ -35,18 +35,17 @@ modApi "dev.tocraft:craftedcore:${minecraft}-${craftedcore_version}"
 common:
 
 ```Groovy
-modApi "dev.tocraft:craftedcore:1.20.2-2.0"
+modApi "dev.tocraft:craftedcore:8.0"
 ```
 
 fabric:
 
 ```Groovy
-modApi "dev.tocraft:craftedcore-fabric:1.20.2-2.0"
+modApi "dev.tocraft:craftedcore-fabric:8.0"
 ```
 
-forge:
+neoforge:
 
 ```Groovy
-modApi "dev.tocraft:craftedcore-forge:1.20.2-2.0"
+modApi "dev.tocraft:craftedcore-neoforge:8.0"
 ```
-
