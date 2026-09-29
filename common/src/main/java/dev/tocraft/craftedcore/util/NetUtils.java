@@ -19,6 +19,9 @@ public class NetUtils {
 
     public static byte @NotNull [] getByteResponse(@NotNull Map<String, String> header, @NotNull URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setConnectTimeout(4000);
+        connection.setReadTimeout(4000);
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
         for (Map.Entry<String, String> entry : header.entrySet()) {
             connection.addRequestProperty(entry.getKey(), entry.getValue());
         }
